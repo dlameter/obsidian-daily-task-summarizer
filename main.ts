@@ -12,23 +12,7 @@ const allText = await Promise.all(
     })
 )
 .then((text) => 
-    text.filter((result) => result !== null)
-        .reduce((prev, curr) => {
-            let text = ""
-            if (prev) {
-                text = prev
-            }
-
-            if (curr) {
-                if (text) {
-                    text += curr
-                } else {
-                    text = curr
-                }
-            }
-
-            return text
-        })
+    text.filter((result) => result !== null).join('\n')
 )
 
 console.log(allText)
