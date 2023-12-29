@@ -1,5 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/assert_equals.ts";
 import { TaskGraph, textToTaskGraph } from "./taskGrapher.ts";
+import { assertThrows } from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 Deno.test('taskGrapher',  async (t) => {
     const verifyParsedFileReturns = (fileContents: string, expected: TaskGraph[]) => {
@@ -141,5 +142,52 @@ Miscellaneous
                 { task: { checked: true, text: 'checked' } }
             ]
         )
+    })
+
+    await t.step('throws error if nested list jumps an indentation level', () => {
+        assertThrows(() => textToTaskGraph(
+`- [ ] unchecked
+\t\t- [x] checked`
+        ))
+    })
+
+    await t.step('returns tasks if non nested list is interrupted with text in between', () => {
+        verifyParsedFileReturns(
+`- [ ] unchecked
+interupt
+- [x] checked`,
+            [
+                { task: { checked: false, text: 'unchecked' } },
+                { task: { checked: true, text: 'checked' } }
+            ]
+        )
+    })
+
+    await t.step('returns nested tasks if nested tasks are not interrupted with non tasks in between', () => {
+        verifyParsedFileReturns(
+`- [ ] unchecked
+\t- [x] checked 
+interupt
+- [x] checked
+\t- [ ] unchecked`,
+            [
+                {
+                    task: { checked: false, text: 'unchecked' },
+                    children: [{ task: { checked: true, text: 'checked' } }]
+                },
+                {
+                    task: { checked: true, text: 'checked' },
+                    children: [{ task: { checked: false, text: 'unchecked' } }]
+                }
+            ]
+        )
+    })
+
+    await t.step('throws error if nested list is interrupted with text in between', () => {
+        assertThrows(() => textToTaskGraph(
+`- [ ] unchecked
+interupt
+\t- [x] checked`
+        ))
     })
 })

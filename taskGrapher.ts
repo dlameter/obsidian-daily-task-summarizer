@@ -9,7 +9,7 @@ export interface TaskGraph {
 export function textToTaskGraph(text: string): TaskGraph[] {
     const results: TaskGraph[] = []
 
-    let lastIndentation = 0
+    let lastIndentation = -1
     const taskStack: TaskGraph[] = []
     for (const line of text.split('\n')) {
         const task = parseTask(line)
@@ -42,6 +42,11 @@ export function textToTaskGraph(text: string): TaskGraph[] {
             }
 
             taskStack.push(validMember)
+        } else {
+            lastIndentation = -1
+            while (taskStack.length > 0) {
+                taskStack.pop()
+            }
         }
     }
 
