@@ -1,7 +1,4 @@
-export interface Task {
-    checked: boolean
-    text: string
-}
+import { Task } from "./models/Task.ts";
 
 export function parseTask(line: string): Task | null {
     const matches = line.match(/\s*- \[([ x])\](.*)$/)

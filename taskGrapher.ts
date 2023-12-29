@@ -1,10 +1,6 @@
 import { indentationChecker } from "./indentationCounter.ts";
-import { Task, parseTask } from "./taskParser.ts"
-
-export interface TaskGraph {
-    task: Task
-    children?: TaskGraph[]
-}
+import { TaskGraph } from "./models/TaskGraph.ts";
+import { parseTask } from "./taskParser.ts"
 
 export function textToTaskGraph(text: string): TaskGraph[] {
     const results: TaskGraph[] = []

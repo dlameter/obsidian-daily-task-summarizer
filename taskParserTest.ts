@@ -1,5 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import { parseTask, Task } from "./taskParser.ts";
+import { parseTask } from "./taskParser.ts";
+import { Task } from "./models/Task.ts";
 
 Deno.test('Task parser test', async (t) => {
     const verifyParserReturns = async (t: Deno.TestContext, input: string, expected: Task | null) => {
