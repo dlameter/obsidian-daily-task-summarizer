@@ -3,15 +3,22 @@ import { TaskAggregator } from "./taskAggregator.ts";
 import { taskAggregateToString } from "./taskAggregateToString.ts";
 import { textToTaskGraph } from "./taskGrapher.ts";
 
-const days: string[] = []
+if (Deno.args.length < 1) {
+    console.log('USAGE: program <path-to-daily-notes>')
+    Deno.exit(0)
+}
+
+const dataDirectory: string = Deno.args[0]
+
 const day = moment().startOf('Day')
+const days: string[] = [moment(day).format('yyyy-MM-DD')]
 for (let i = 0; i < 7; i++) {
     days.push(day.subtract(1, 'days').format('yyyy-MM-DD'))
 }
 
 console.log(await Promise.all(
     days.map((day) => {
-        return Deno.readTextFile('./test_data/' + day + '.md').catch(() => null)
+        return Deno.readTextFile(dataDirectory + day + '.md').catch(() => null)
     })
 )
 .then((text) => {
