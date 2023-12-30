@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/assert_equals.ts";
 import { taskAggregateToString } from "./taskAggregateToString.ts";
 
-Deno.test('taskAggregateToString', (t) => {
+Deno.test('taskAggregateToString', () => {
     assertEquals(taskAggregateToString(
         {
             'task 1': {
