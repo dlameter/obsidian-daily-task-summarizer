@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/assert_equals.ts";
-import { TaskGraph } from "./models/TaskGraph.ts";
-import { TaskAggregator } from "./taskAggregator.ts";
-import { TaskAggregate } from "./models/TaskAggregate.ts";
+import { TaskGraph } from "../src/models/TaskGraph.ts";
+import { TaskAggregator } from "../src/taskAggregator.ts";
+import { TaskAggregate } from "../src/models/TaskAggregate.ts";
 
 Deno.test('TaskAggregator', async (t) => {
     const verifyAggregatorResult = (taskGraphsArray: TaskGraph[][], expected: TaskAggregate) => {

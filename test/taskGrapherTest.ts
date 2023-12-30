@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/assert_equals.ts";
-import { textToTaskGraph } from "./taskGrapher.ts";
+import { textToTaskGraph } from "../src/taskGrapher.ts";
 import { assertThrows } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import { TaskGraph } from "./models/TaskGraph.ts";
+import { TaskGraph } from "../src/models/TaskGraph.ts";
 
 Deno.test('taskGrapher',  async (t) => {
     const verifyParsedFileReturns = (fileContents: string, expected: TaskGraph[]) => {

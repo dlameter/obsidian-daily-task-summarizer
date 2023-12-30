@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.210.0/assert/assert_equals.ts";
-import { indentationChecker } from "./indentationCounter.ts";
+import { indentationChecker } from "../src/indentationCounter.ts";
 
 Deno.test('indentationChecker', async (t) => {
     const verifyCheckerReturns = async (t: Deno.TestContext, input: string, expected: number | null) => {
