@@ -1,12 +1,5 @@
+import { TaskAggregate } from "./models/TaskAggregator.ts";
 import { TaskGraph } from "./models/TaskGraph.ts";
-
-export interface TaskAggregate {
-    [text: string]: {
-        numChecked: number
-        numUnchecked: number
-        children?: TaskAggregate
-    }
-}
 
 export class TaskAggregator {
     result: TaskAggregate = {}
