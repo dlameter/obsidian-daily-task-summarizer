@@ -9,10 +9,11 @@ if (Deno.args.length < 1) {
 }
 
 const dataDirectory: string = Deno.args[0]
+const daysPrior = Deno.args[1] ? parseInt(Deno.args[1]) : 7
 
 const day = moment().startOf('Day')
 const days: string[] = [moment(day).format('yyyy-MM-DD')]
-for (let i = 0; i < 7; i++) {
+for (let i = 0; i < daysPrior; i++) {
     days.push(day.subtract(1, 'days').format('yyyy-MM-DD'))
 }
 
