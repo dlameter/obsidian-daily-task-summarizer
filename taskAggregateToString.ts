@@ -2,9 +2,11 @@ import { createListItemString } from "./listItemPrinter.ts";
 import { TaskAggregate } from "./models/TaskAggregate.ts";
 
 export function taskAggregateToString(taskAggregate: TaskAggregate, indentation = 0): string {
-    let result = ''
+    const entries = Object.entries(taskAggregate)
+    entries.sort((a, b) => a[0] < b[0] ? -1 : 1)
 
-    for (const [text, information] of Object.entries(taskAggregate)) {
+    let result = ''
+    for (const [text, information] of entries) {
         const listItemText = `${text} (c: ${information.numChecked}, u: ${information.numUnchecked})\n`
         result += createListItemString(listItemText, indentation)
 
