@@ -1,4 +1,4 @@
-import { TaskAggregate } from "./models/TaskAggregator.ts";
+import { TaskAggregate } from "./models/TaskAggregate.ts";
 import { TaskGraph } from "./models/TaskGraph.ts";
 
 export class TaskAggregator {
